@@ -51,10 +51,12 @@ Precio.Monitor.pingPongTracker = function () {
   try {
     let res = Precio.Monitor.getUrl(Precio.Monitor.PRECIO_REST_URL, true) // ignore response
     pongElement.style = "color: blue"
-    pongElement.innerHTML = "PONG <sup>" + dateTime.toISOString() + "</sup>"
+    pongElement.title = "at: " + dateTime.toISOString()
+    pongElement.innerHTML = "PONG"
   } catch {
     pongElement.style = "color: red"
-    pongElement.innerHTML = ":( <sup>" + dateTime.toISOString() + "</sup>"
+    pongElement.title = "at: " + dateTime.toISOString()
+    pongElement.innerHTML = ":("
   }
 
   // Reschedule run in 1 second...
