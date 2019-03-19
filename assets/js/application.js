@@ -43,6 +43,26 @@ Precio.Monitor._GetGdaxUrl = function () {
   )
 }
 
+// We check the pong
+Precio.Monitor.pingPongTracker = function () {
+  var pongElement = document.getElementById("pong")
+  let dateTime = new Date()
+
+  try {
+    let res = Precio.Monitor.getUrl(Precio.Monitor.PRECIO_REST_URL, true) // ignore response
+    pongElement.style = "color: blue"
+    pongElement.innerHTML = "PONG <sup>" + dateTime.toISOString() + "</sup>"
+  } catch {
+    pongElement.style = "color: red"
+    pongElement.innerHTML = ":( <sup>" + dateTime.toISOString() + "</sup>"
+  }
+
+  // Reschedule run in 1 second...
+  setTimeout(function () {
+    Precio.Monitor.pingPongTracker()
+  }, 1000)
+}
+
 Precio.Monitor.serverTimeTracker = function () {
   let gdaxServerTime = new Date(JSON.parse(Precio.Monitor.getUrl(Precio.Monitor.GDAX_REST_TICKER_URL)).time)
   let precioServerTime = new Date(JSON.parse(Precio.Monitor.getUrl(Precio.Monitor.PRECIO_REST_URL)).T * 1000)
@@ -150,6 +170,7 @@ Precio.Monitor.latencyTracker = function () {
 }
 
 window.onload = function (e) {
+  Precio.Monitor.pingPongTracker()
   Precio.Monitor.latencyTracker()
   Precio.Monitor.priceTracker()
   Precio.Monitor.serverTimeTracker()
