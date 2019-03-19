@@ -46,16 +46,22 @@ Precio.Monitor._GetGdaxUrl = function () {
 // We check the pong
 Precio.Monitor.pingPongTracker = function () {
   var pongElement = document.getElementById("pong")
+  var statusTableElement = document.getElementById("status-table")
   let dateTime = new Date()
 
   try {
     let res = Precio.Monitor.getUrl(Precio.Monitor.PRECIO_REST_URL, true) // ignore response
+
+    statusTableElement.style = ""
     pongElement.style = "color: blue"
     pongElement.title = "at: " + dateTime.toISOString()
+
     pongElement.innerHTML = "PONG"
   } catch {
+    statusTableElement.style = "visibility: collapse"
     pongElement.style = "color: red"
     pongElement.title = "at: " + dateTime.toISOString()
+
     pongElement.innerHTML = ":("
   }
 
