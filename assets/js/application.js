@@ -53,7 +53,7 @@ Precio.Monitor.pingPongTracker = function () {
     let res = Precio.Monitor.getUrl(Precio.Monitor.PRECIO_REST_URL, true) // ignore response
 
     statusTableElement.style = ""
-    pongElement.style = "color: blue"
+    pongElement.style = "color: green"
     pongElement.title = "at: " + dateTime.toISOString()
 
     pongElement.innerHTML = "PONG"
@@ -89,11 +89,11 @@ Precio.Monitor.serverTimeTracker = function () {
     gdaxTimeElement.style = ""
   } else if (precioServerTimeInMs > gdaxServerTimeInMs) {
     precioTimeElement.style = "color: red"
-    gdaxTimeElement.style = "color: blue"
+    gdaxTimeElement.style = "color: green"
 
     precioTimeElement.innerHTML += " <sup>+" + (Math.abs(precioServerTimeInMs - gdaxServerTimeInMs) / 1000).toFixed(2) + "s</sup>"
   } else {
-    precioTimeElement.style = "color: blue"
+    precioTimeElement.style = "color: green"
     gdaxTimeElement.style = "color: red"
 
     precioTimeElement.innerHTML += " <sup>-" + (Math.abs(precioServerTimeInMs - gdaxServerTimeInMs) / 1000).toFixed(2) + "s</sup>"
@@ -125,11 +125,11 @@ Precio.Monitor.priceTracker = function () {
     gdaxPriceElement.style = ""
   } else if (precioPrice > gdaxPrice) {
     precioPriceElement.style = "color: red"
-    gdaxPriceElement.style = "color: blue"
+    gdaxPriceElement.style = "color: green"
 
     precioPriceElement.innerHTML += " <sup>+$" + Math.abs(precioPrice - gdaxPrice).toFixed(2) + "</sup>"
   } else {
-    precioPriceElement.style = "color: blue"
+    precioPriceElement.style = "color: green"
     gdaxPriceElement.style = "color: red"
 
     precioPriceElement.innerHTML += " <sup>-$" + Math.abs(precioPrice - gdaxPrice).toFixed(2) + "</sup>"
@@ -159,14 +159,14 @@ Precio.Monitor.latencyTracker = function () {
     gdaxLatency.style = ""
   } else if (precioTime < gdaxTime) {
     // Precio is faster than gdax
-    precioLatency.style = "color: blue"
+    precioLatency.style = "color: green"
     gdaxLatency.style = "color: red"
 
     precioLatency.innerHTML += " <sup>-" + Math.abs(precioTime - gdaxTime) + "ms</sup>"
   } else {
     // Precio is slower
     precioLatency.style = "color: red"
-    gdaxLatency.style = "color: blue"
+    gdaxLatency.style = "color: green"
 
     precioLatency.innerHTML += " <sup>+" + Math.abs(precioTime - gdaxTime) + " ms</sup>"
   }
